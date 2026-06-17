@@ -5,7 +5,7 @@
 #### 投资研究用的 Agent Skills 集合
 
 [![License](https://img.shields.io/badge/License-MIT-3B82F6?style=for-the-badge)](./LICENSE)
-[![Skills](https://img.shields.io/badge/Skills-1-10B981?style=for-the-badge)](#-skills)
+[![Skills](https://img.shields.io/badge/Skills-2-10B981?style=for-the-badge)](#-skills)
 [![AgentSkills](https://img.shields.io/badge/AgentSkills-Standard-8B5CF6?style=for-the-badge)](https://agentskills.io)
 
 ![Claude Code](https://img.shields.io/badge/Claude_Code-Skill-D97706?style=flat-square&logo=anthropic&logoColor=white)
@@ -23,6 +23,7 @@
 | 名字 | 一句话 | 入口 |
 | --- | --- | --- |
 | [**company-moat-research（公司护城河研究）**](#-company-moat-research公司护城河研究) | 从新进入者、产业研究员、长期投资者三个视角拆解公司护城河和行业进入壁垒 | [SKILL.md](./company-moat-research/SKILL.md) |
+| [**valuation-expectation-check（股价预期验证）**](#-valuation-expectation-check股价预期验证) | 检查当前股价隐含的市场预期、兑现难度、估值风险和后续验证指标 | [SKILL.md](./valuation-expectation-check/SKILL.md) |
 
 ---
 
@@ -34,7 +35,7 @@
 帮我安装这个 skill：https://github.com/vampire-locker/investment-research-skills/tree/main/company-moat-research
 ```
 
-也可以手动安装到 Codex：
+也可以手动安装到 Codex。安装单个 skill：
 
 ```bash
 git clone git@github.com:vampire-locker/investment-research-skills.git
@@ -42,7 +43,16 @@ mkdir -p ~/.codex/skills
 cp -R investment-research-skills/company-moat-research ~/.codex/skills/
 ```
 
-Claude Code、OpenCode 等其他客户端请按各自的 skill 导入方式安装 `company-moat-research` 目录。
+安装全部 skills：
+
+```bash
+git clone git@github.com:vampire-locker/investment-research-skills.git
+mkdir -p ~/.codex/skills
+cp -R investment-research-skills/company-moat-research ~/.codex/skills/
+cp -R investment-research-skills/valuation-expectation-check ~/.codex/skills/
+```
+
+Claude Code、OpenCode 等其他客户端请按各自的 skill 导入方式安装所需 skill 目录。
 
 ---
 
@@ -81,6 +91,40 @@ $company-moat-research 分析闪迪，重点看 NAND 行业进入壁垒、数据
 
 → [SKILL.md](./company-moat-research/SKILL.md) · [研究框架](./company-moat-research/references/research-framework.md)
 
+### valuation-expectation-check（股价预期验证）
+
+> *“根据前面的分析，如何看待它当前的股价？”*
+
+这个 skill 用来把公司研究、行业研究、财报分析或护城河判断，映射到当前股价和估值预期上。它不回答“买还是卖”，而是拆解当前价格隐含了什么市场预期、这些预期是否和基本面匹配、哪些变量会推动重估或杀估值。
+
+**它会重点回答**
+
+- 当前股价和估值倍数隐含了什么增长、利润率和现金流预期。
+- 这些预期和已有基本面分析是否匹配。
+- 市场已经计入了什么，可能还没计入什么。
+- 什么数据会支持继续重估，什么信号会导致杀估值。
+- 接下来最值得跟踪的指标是什么。
+
+**适合**
+
+- 公司研究后的股价追问
+- 财报后的估值再评估
+- 成长股、周期股、平台公司、重资产公司等不同类型公司的估值预期检查
+- 市场隐含预期反推
+- 风险收益结构梳理
+
+**怎么触发**
+
+```text
+使用 $valuation-expectation-check 分析英伟达当前股价隐含了什么市场预期。
+
+根据前面对闪迪的分析，用 $valuation-expectation-check 看看当前股价是否已经反映 NAND 景气。
+
+这家公司当前估值贵不贵？请不要给买卖建议，只拆解市场预期和后续验证指标。
+```
+
+→ [SKILL.md](./valuation-expectation-check/SKILL.md) · [估值框架](./valuation-expectation-check/references/valuation-framework.md)
+
 ---
 
 ## 仓库结构
@@ -90,12 +134,18 @@ investment-research-skills/
 ├── README.md
 ├── README.en.md
 ├── LICENSE
-└── company-moat-research/
+├── company-moat-research/
     ├── SKILL.md
     ├── agents/
     │   └── openai.yaml
     └── references/
         └── research-framework.md
+└── valuation-expectation-check/
+    ├── SKILL.md
+    ├── agents/
+    │   └── openai.yaml
+    └── references/
+        └── valuation-framework.md
 ```
 
 ---
