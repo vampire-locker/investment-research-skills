@@ -57,6 +57,6 @@ description: 综合股票研究报告生成技能。用于把 company-moat-resea
 
 如果用户要求保存为文件，默认使用 Markdown 文件，并采用清晰、通用的文件名：
 
-`{公司名或股票代码}-research-report.md`
+`{公司名}-研究报告-{YYYYMMDD}.md`
 
 如果用户提供目录或文件名，优先使用用户指定路径。
