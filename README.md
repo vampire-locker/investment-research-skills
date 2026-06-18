@@ -233,12 +233,12 @@ investment-research-skills/
 │   │   └── openai.yaml
 │   └── references/
 │       └── valuation-framework.md
-└── integrated-equity-research-report/
-    ├── SKILL.md
-    ├── agents/
-    │   └── openai.yaml
-    └── assets/
-        └── report-template.md
+├── integrated-equity-research-report/
+│   ├── SKILL.md
+│   ├── agents/
+│   │   └── openai.yaml
+│   └── assets/
+│       └── report-template.md
 └── equity-research-pipeline/
     ├── SKILL.md
     └── agents/
