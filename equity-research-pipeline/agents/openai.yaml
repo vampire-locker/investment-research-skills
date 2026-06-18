@@ -1,0 +1,4 @@
+interface:
+  display_name: "一站式股票研究"
+  short_description: "一条指令完成护城河研究、估值验证和报告生成"
+  default_prompt: "使用 $equity-research-pipeline 分析一家公司，完成护城河研究、当前股价预期验证，并生成完整 Markdown 研究报告。"

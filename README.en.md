@@ -5,7 +5,7 @@
 #### Agent Skills for investment research workflows
 
 [![License](https://img.shields.io/badge/License-MIT-3B82F6?style=for-the-badge)](./LICENSE)
-[![Skills](https://img.shields.io/badge/Skills-3-10B981?style=for-the-badge)](#-skills)
+[![Skills](https://img.shields.io/badge/Skills-4-10B981?style=for-the-badge)](#-skills)
 [![AgentSkills](https://img.shields.io/badge/AgentSkills-Standard-8B5CF6?style=for-the-badge)](https://agentskills.io)
 
 ![Claude Code](https://img.shields.io/badge/Claude_Code-Skill-D97706?style=flat-square&logo=anthropic&logoColor=white)
@@ -25,6 +25,7 @@ The current skills are Chinese-first and designed for company research, industry
 | [**company-moat-research**](#-company-moat-research) | Analyze company moats and industry entry barriers from new entrant, industry researcher, and long-term investor perspectives | [SKILL.md](./company-moat-research/SKILL.md) |
 | [**valuation-expectation-check**](#-valuation-expectation-check) | Check the market expectations, valuation risk, and validation metrics implied by the current stock price | [SKILL.md](./valuation-expectation-check/SKILL.md) |
 | [**integrated-equity-research-report**](#-integrated-equity-research-report) | Merge moat research, valuation checks, and other investment materials into a standardized Markdown research report | [SKILL.md](./integrated-equity-research-report/SKILL.md) |
+| [**equity-research-pipeline**](#-equity-research-pipeline) | One command to run moat research, valuation check, and report generation end-to-end | [SKILL.md](./equity-research-pipeline/SKILL.md) |
 
 ---
 
@@ -52,6 +53,7 @@ mkdir -p ~/.codex/skills
 cp -R investment-research-skills/company-moat-research ~/.codex/skills/
 cp -R investment-research-skills/valuation-expectation-check ~/.codex/skills/
 cp -R investment-research-skills/integrated-equity-research-report ~/.codex/skills/
+cp -R investment-research-skills/equity-research-pipeline ~/.codex/skills/
 ```
 
 For Claude Code, OpenCode, and other clients, import the desired skill directory according to the client's current skill workflow.
@@ -60,13 +62,14 @@ For Claude Code, OpenCode, and other clients, import the desired skill directory
 
 ## Workflow
 
-These three skills can be used independently or as a complete research chain: analyze the moat first, then check the expectations implied by the current stock price, and finally turn the work into a standardized Markdown report.
+These three skills can be used independently or as a complete research chain: analyze the moat first, then check the expectations implied by the current stock price, and finally turn the work into a standardized Markdown report. You can also use `equity-research-pipeline` to run the entire flow in one command.
 
 ```mermaid
 flowchart TD
     A["company-moat-research<br/>Company moat research"] --> B["valuation-expectation-check<br/>Valuation expectation check"]
     A --> C["integrated-equity-research-report<br/>Integrated equity research report"]
     B --> C
+    P["equity-research-pipeline<br/>End-to-end equity research"] --> A
 
     A -.-> D["Business boundary / Entry barriers / Moat / Business model"]
     B -.-> E["Current valuation / Implied expectations / Re-rating and de-rating conditions"]
@@ -178,6 +181,37 @@ Generate a standardized company research report from these research materials. D
 
 → [SKILL.md](./integrated-equity-research-report/SKILL.md) · [Report template](./integrated-equity-research-report/assets/report-template.md)
 
+### equity-research-pipeline
+
+> *"/equity-research-pipeline Microsoft" — one command, complete research report.*
+
+This skill chains moat research, valuation expectation checks, and report generation into a single end-to-end pipeline. Provide a company name and it runs all three steps in sequence, producing an archivable Markdown research report.
+
+**It runs these steps in order**
+
+1. **Moat research**: analyze business boundaries, industry barriers, moat sources, business model, and financial quality.
+2. **Valuation check**: fetch the latest stock price, break down market-implied expectations, and compare them against the moat analysis.
+3. **Report generation**: merge both analyses into a standardized Markdown research report.
+
+**Good for**
+
+- Quickly bootstrapping a company research archive
+- Simplifying multi-step research workflows
+- Batch-generating standardized research reports
+- Situations where you don't want to trigger three separate skills manually
+
+**How to trigger**
+
+```text
+Use $equity-research-pipeline to analyze Microsoft.
+
+$equity-research-pipeline TSMC, save the report to ~/research/.
+
+Run the end-to-end research pipeline for NVIDIA and produce a full report.
+```
+
+→ [SKILL.md](./equity-research-pipeline/SKILL.md)
+
 ---
 
 ## Repository Layout
@@ -205,6 +239,10 @@ investment-research-skills/
     │   └── openai.yaml
     └── assets/
         └── report-template.md
+└── equity-research-pipeline/
+    ├── SKILL.md
+    └── agents/
+        └── openai.yaml
 ```
 
 ---
