@@ -1,4 +1,4 @@
 interface:
   display_name: "股价预期验证"
-  short_description: "分析当前股价隐含预期、估值风险和关键验证指标"
-  default_prompt: "使用 $valuation-expectation-check 分析当前股价隐含的市场预期、估值风险和需要验证的关键指标。"
+  short_description: "简洁分析当前股价隐含预期、估值风险和关键验证指标"
+  default_prompt: "使用 $valuation-expectation-check 简洁分析当前股价隐含的市场预期、估值风险和需要验证的关键指标；只有在问题复杂或我明确要求时才展开完整估值框架。"

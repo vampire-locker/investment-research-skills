@@ -5,7 +5,7 @@
 #### Agent Skills for investment research workflows
 
 [![License](https://img.shields.io/badge/License-MIT-3B82F6?style=for-the-badge)](./LICENSE)
-[![Skills](https://img.shields.io/badge/Skills-2-10B981?style=for-the-badge)](#-skills)
+[![Skills](https://img.shields.io/badge/Skills-3-10B981?style=for-the-badge)](#-skills)
 [![AgentSkills](https://img.shields.io/badge/AgentSkills-Standard-8B5CF6?style=for-the-badge)](https://agentskills.io)
 
 ![Claude Code](https://img.shields.io/badge/Claude_Code-Skill-D97706?style=flat-square&logo=anthropic&logoColor=white)
@@ -24,6 +24,7 @@ The current skills are Chinese-first and designed for company research, industry
 | --- | --- | --- |
 | [**company-moat-research**](#-company-moat-research) | Analyze company moats and industry entry barriers from new entrant, industry researcher, and long-term investor perspectives | [SKILL.md](./company-moat-research/SKILL.md) |
 | [**valuation-expectation-check**](#-valuation-expectation-check) | Check the market expectations, valuation risk, and validation metrics implied by the current stock price | [SKILL.md](./valuation-expectation-check/SKILL.md) |
+| [**integrated-equity-research-report**](#-integrated-equity-research-report) | Merge moat research, valuation checks, and other investment materials into a standardized Markdown research report | [SKILL.md](./integrated-equity-research-report/SKILL.md) |
 
 ---
 
@@ -50,9 +51,27 @@ git clone git@github.com:vampire-locker/investment-research-skills.git
 mkdir -p ~/.codex/skills
 cp -R investment-research-skills/company-moat-research ~/.codex/skills/
 cp -R investment-research-skills/valuation-expectation-check ~/.codex/skills/
+cp -R investment-research-skills/integrated-equity-research-report ~/.codex/skills/
 ```
 
 For Claude Code, OpenCode, and other clients, import the desired skill directory according to the client's current skill workflow.
+
+---
+
+## Workflow
+
+These three skills can be used independently or as a complete research chain: analyze the moat first, then check the expectations implied by the current stock price, and finally turn the work into a standardized Markdown report.
+
+```mermaid
+flowchart TD
+    A["company-moat-research<br/>Company moat research"] --> B["valuation-expectation-check<br/>Valuation expectation check"]
+    A --> C["integrated-equity-research-report<br/>Integrated equity research report"]
+    B --> C
+
+    A -.-> D["Business boundary / Entry barriers / Moat / Business model"]
+    B -.-> E["Current valuation / Implied expectations / Re-rating and de-rating conditions"]
+    C -.-> F["Standardized Markdown research report"]
+```
 
 ---
 
@@ -125,6 +144,40 @@ Is this company's current valuation expensive? Do not give buy/sell advice; brea
 
 → [SKILL.md](./valuation-expectation-check/SKILL.md) · [Valuation framework](./valuation-expectation-check/references/valuation-framework.md)
 
+### integrated-equity-research-report
+
+> *"Turn the previous research into a Markdown report that can be archived."*
+
+This skill merges moat research, valuation expectation checks, earnings analysis, or other investment research materials into a standardized Markdown research report with stable headings and clear evidence classification. It does not redo company analysis or valuation work; it deduplicates, compresses, standardizes, and preserves conclusions.
+
+**It focuses on**
+
+- Merging outputs from `company-moat-research` and `valuation-expectation-check`.
+- Standardizing Markdown report headings, order, and metadata.
+- Preserving confirmed facts, reasoned inferences, and assumptions to verify.
+- Removing repeated sections while connecting moat conclusions with valuation expectations.
+- Producing a formal research report suitable for archiving.
+
+**Good for**
+
+- Archiving multi-turn company research
+- Organizing investment memos
+- Standardizing outputs from different agents
+- Combining moat analysis and valuation expectation checks
+- Generating Markdown research reports
+
+**How to trigger**
+
+```text
+Use $integrated-equity-research-report to turn the previous Tencent moat analysis and valuation expectation check into a Markdown research report.
+
+Merge the previous $company-moat-research and $valuation-expectation-check outputs into a formal research report.
+
+Generate a standardized company research report from these research materials. Do not give buy/sell advice.
+```
+
+→ [SKILL.md](./integrated-equity-research-report/SKILL.md) · [Report template](./integrated-equity-research-report/assets/report-template.md)
+
 ---
 
 ## Repository Layout
@@ -135,17 +188,23 @@ investment-research-skills/
 ├── README.en.md
 ├── LICENSE
 ├── company-moat-research/
+│   ├── SKILL.md
+│   ├── agents/
+│   │   └── openai.yaml
+│   └── references/
+│       └── research-framework.md
+├── valuation-expectation-check/
+│   ├── SKILL.md
+│   ├── agents/
+│   │   └── openai.yaml
+│   └── references/
+│       └── valuation-framework.md
+└── integrated-equity-research-report/
     ├── SKILL.md
     ├── agents/
     │   └── openai.yaml
-    └── references/
-        └── research-framework.md
-└── valuation-expectation-check/
-    ├── SKILL.md
-    ├── agents/
-    │   └── openai.yaml
-    └── references/
-        └── valuation-framework.md
+    └── assets/
+        └── report-template.md
 ```
 
 ---

@@ -1,0 +1,4 @@
+interface:
+  display_name: "综合股票研究报告"
+  short_description: "合并多轮投资研究并生成标准Markdown归档报告"
+  default_prompt: "使用 $integrated-equity-research-report 将前面的护城河研究和估值预期检查整理成一份统一格式的 Markdown 研究报告。"

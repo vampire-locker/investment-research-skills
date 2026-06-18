@@ -5,7 +5,7 @@
 #### 投资研究用的 Agent Skills 集合
 
 [![License](https://img.shields.io/badge/License-MIT-3B82F6?style=for-the-badge)](./LICENSE)
-[![Skills](https://img.shields.io/badge/Skills-2-10B981?style=for-the-badge)](#-skills)
+[![Skills](https://img.shields.io/badge/Skills-3-10B981?style=for-the-badge)](#-skills)
 [![AgentSkills](https://img.shields.io/badge/AgentSkills-Standard-8B5CF6?style=for-the-badge)](https://agentskills.io)
 
 ![Claude Code](https://img.shields.io/badge/Claude_Code-Skill-D97706?style=flat-square&logo=anthropic&logoColor=white)
@@ -24,6 +24,7 @@
 | --- | --- | --- |
 | [**company-moat-research（公司护城河研究）**](#-company-moat-research公司护城河研究) | 从新进入者、产业研究员、长期投资者三个视角拆解公司护城河和行业进入壁垒 | [SKILL.md](./company-moat-research/SKILL.md) |
 | [**valuation-expectation-check（股价预期验证）**](#-valuation-expectation-check股价预期验证) | 检查当前股价隐含的市场预期、兑现难度、估值风险和后续验证指标 | [SKILL.md](./valuation-expectation-check/SKILL.md) |
+| [**integrated-equity-research-report（综合股票研究报告）**](#-integrated-equity-research-report综合股票研究报告) | 将护城河研究、估值预期验证和其他投资材料合并成统一格式的 Markdown 研究报告 | [SKILL.md](./integrated-equity-research-report/SKILL.md) |
 
 ---
 
@@ -50,9 +51,27 @@ git clone git@github.com:vampire-locker/investment-research-skills.git
 mkdir -p ~/.codex/skills
 cp -R investment-research-skills/company-moat-research ~/.codex/skills/
 cp -R investment-research-skills/valuation-expectation-check ~/.codex/skills/
+cp -R investment-research-skills/integrated-equity-research-report ~/.codex/skills/
 ```
 
 Claude Code、OpenCode 等其他客户端请按各自的 skill 导入方式安装所需 skill 目录。
+
+---
+
+## 工作流
+
+这三个 skill 可以单独使用，也可以组成一条完整研究链路：先分析护城河，再验证当前股价隐含预期，最后沉淀为统一格式的 Markdown 报告。
+
+```mermaid
+flowchart TD
+    A["company-moat-research<br/>公司护城河研究"] --> B["valuation-expectation-check<br/>股价预期验证"]
+    A --> C["integrated-equity-research-report<br/>综合股票研究报告"]
+    B --> C
+
+    A -.-> D["业务边界 / 行业壁垒 / 护城河 / 商业模式"]
+    B -.-> E["当前估值 / 隐含预期 / 重估与杀估值条件"]
+    C -.-> F["统一格式 Markdown 研究报告"]
+```
 
 ---
 
@@ -125,6 +144,40 @@ $company-moat-research 分析闪迪，重点看 NAND 行业进入壁垒、数据
 
 → [SKILL.md](./valuation-expectation-check/SKILL.md) · [估值框架](./valuation-expectation-check/references/valuation-framework.md)
 
+### integrated-equity-research-report（综合股票研究报告）
+
+> *“把前面的研究整理成一份可以归档的 Markdown 报告。”*
+
+这个 skill 用来把护城河研究、股价预期验证、财报分析或其他投资研究材料，合并成一份结构统一、标题稳定、证据分层清楚的 Markdown 研究报告。它不重新做公司分析或估值分析，而是负责去重、压缩、统一格式和沉淀结论。
+
+**它会重点处理**
+
+- 合并 `company-moat-research` 和 `valuation-expectation-check` 的输出。
+- 统一 Markdown 报告标题、顺序和元数据。
+- 保留已确认事实、合理推断和待验证假设。
+- 去掉重复段落，让护城河结论和估值预期自然衔接。
+- 输出适合归档的正式研究报告。
+
+**适合**
+
+- 多轮公司研究后的报告沉淀
+- 投资备忘录整理
+- 不同 agent 输出格式统一
+- 护城河分析和估值预期检查的合并归档
+- Markdown 研究报告生成
+
+**怎么触发**
+
+```text
+使用 $integrated-equity-research-report 把前面的腾讯护城河分析和估值预期检查整理成一份 Markdown 研究报告。
+
+将上面的 $company-moat-research 和 $valuation-expectation-check 结果合并为正式研究报告。
+
+根据这些研究材料生成一份统一格式的公司研究报告，不要给买卖建议。
+```
+
+→ [SKILL.md](./integrated-equity-research-report/SKILL.md) · [报告模板](./integrated-equity-research-report/assets/report-template.md)
+
 ---
 
 ## 仓库结构
@@ -135,17 +188,23 @@ investment-research-skills/
 ├── README.en.md
 ├── LICENSE
 ├── company-moat-research/
+│   ├── SKILL.md
+│   ├── agents/
+│   │   └── openai.yaml
+│   └── references/
+│       └── research-framework.md
+├── valuation-expectation-check/
+│   ├── SKILL.md
+│   ├── agents/
+│   │   └── openai.yaml
+│   └── references/
+│       └── valuation-framework.md
+└── integrated-equity-research-report/
     ├── SKILL.md
     ├── agents/
     │   └── openai.yaml
-    └── references/
-        └── research-framework.md
-└── valuation-expectation-check/
-    ├── SKILL.md
-    ├── agents/
-    │   └── openai.yaml
-    └── references/
-        └── valuation-framework.md
+    └── assets/
+        └── report-template.md
 ```
 
 ---
