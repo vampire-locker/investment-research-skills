@@ -1,12 +1,12 @@
 ---
-company:
-ticker:
-exchange:
-report_date:
-data_cutoff:
-price_date:
-currency:
-source_material:
+公司：
+股票代码：
+交易所：
+报告日期：
+数据截止日期：
+股价日期：
+货币：
+材料来源：
 ---
 
 # {公司名}研究报告
