@@ -5,7 +5,7 @@
 #### Agent Skills for investment research workflows
 
 [![License](https://img.shields.io/badge/License-MIT-3B82F6?style=for-the-badge)](./LICENSE)
-[![Skills](https://img.shields.io/badge/Skills-4-10B981?style=for-the-badge)](#-skills)
+[![Skills](https://img.shields.io/badge/Skills-5-10B981?style=for-the-badge)](#-skills)
 [![AgentSkills](https://img.shields.io/badge/AgentSkills-Standard-8B5CF6?style=for-the-badge)](https://agentskills.io)
 
 ![Claude Code](https://img.shields.io/badge/Claude_Code-Skill-D97706?style=flat-square&logo=anthropic&logoColor=white)
@@ -26,6 +26,7 @@ The current skills are Chinese-first and designed for company research, industry
 | [**valuation-expectation-check**](#-valuation-expectation-check) | Check the market expectations, valuation risk, and validation metrics implied by the current stock price | [SKILL.md](./valuation-expectation-check/SKILL.md) |
 | [**integrated-equity-research-report**](#-integrated-equity-research-report) | Merge moat research, valuation checks, and other investment materials into a standardized Markdown research report | [SKILL.md](./integrated-equity-research-report/SKILL.md) |
 | [**equity-research-pipeline**](#-equity-research-pipeline) | One command to run moat research, valuation check, and report generation end-to-end | [SKILL.md](./equity-research-pipeline/SKILL.md) |
+| [**equity-comparison-advisor**](#-equity-comparison-advisor) | Compare multiple company reports, rank candidates, and build a decision framework | [SKILL.md](./equity-comparison-advisor/SKILL.md) |
 
 ---
 
@@ -54,6 +55,7 @@ cp -R investment-research-skills/company-moat-research ~/.codex/skills/
 cp -R investment-research-skills/valuation-expectation-check ~/.codex/skills/
 cp -R investment-research-skills/integrated-equity-research-report ~/.codex/skills/
 cp -R investment-research-skills/equity-research-pipeline ~/.codex/skills/
+cp -R investment-research-skills/equity-comparison-advisor ~/.codex/skills/
 ```
 
 For Claude Code, OpenCode, and other clients, import the desired skill directory according to the client's current skill workflow.
@@ -62,7 +64,7 @@ For Claude Code, OpenCode, and other clients, import the desired skill directory
 
 ## Workflow
 
-These three skills can be used independently or as a complete research chain: analyze the moat first, then check the expectations implied by the current stock price, and finally turn the work into a standardized Markdown report. You can also use `equity-research-pipeline` to run the entire flow in one command.
+These skills can be used independently or as a complete research chain: analyze the moat first, then check the expectations implied by the current stock price, and finally turn the work into a standardized Markdown report. You can also use `equity-research-pipeline` to run the entire flow in one command. After generating reports for multiple companies, use `equity-comparison-advisor` to compare, rank, and frame portfolio decisions.
 
 ```mermaid
 flowchart TD
@@ -70,10 +72,13 @@ flowchart TD
     A --> C["integrated-equity-research-report<br/>Integrated equity research report"]
     B --> C
     P["equity-research-pipeline<br/>End-to-end equity research"] --> A
+    P --> G["equity-comparison-advisor<br/>Equity comparison advisor"]
+    C --> G
 
     A -.-> D["Business boundary / Entry barriers / Moat / Business model"]
     B -.-> E["Current valuation / Implied expectations / Re-rating and de-rating conditions"]
     C -.-> F["Standardized Markdown research report"]
+    G -.-> H["Comparison / Ranking / Risk-reward matrix / Allocation framework"]
 ```
 
 ---
@@ -212,6 +217,40 @@ Run the end-to-end research pipeline for NVIDIA and produce a full report.
 
 → [SKILL.md](./equity-research-pipeline/SKILL.md)
 
+### equity-comparison-advisor
+
+> *"Across these research reports, which companies deserve priority research or allocation?"*
+
+This skill reads multiple company research reports, extracts comparable fields, and produces table-first comparisons, rankings, risk-reward matrices, and conditional allocation frameworks. It is designed to run after `equity-research-pipeline` has generated reports for a group of companies.
+
+**It focuses on**
+
+- Summarizing business quality, growth certainty, valuation pressure, risk level, and expectation gaps across companies.
+- Presenting conclusions through tables, ranking grids, and risk-reward matrices.
+- Framing conditional suggestions such as priority research, staged allocation, waiting for valuation digestion, small-position observation, or watchlist only.
+- Listing buy, wait, and reassessment conditions.
+- Preserving data dates and evidence boundaries while avoiding unconditional buy/sell calls.
+
+**Good for**
+
+- Comparing the Magnificent Seven or other peer groups
+- Summarizing multiple Markdown research reports
+- Ranking portfolio candidates
+- Building risk-reward matrices and investor-type matching
+- Defining buy conditions, wait signals, and risk signals
+
+**How to trigger**
+
+```text
+Use $equity-comparison-advisor to compare the Magnificent Seven reports under ~/research/magnificent-seven.
+
+Based on these reports, compare which companies deserve priority research and which should wait for valuation digestion.
+
+Use $equity-comparison-advisor to produce table-based rankings, a risk-reward matrix, and buy-condition tables.
+```
+
+→ [SKILL.md](./equity-comparison-advisor/SKILL.md) · [Comparison framework](./equity-comparison-advisor/references/comparison-framework.md)
+
 ---
 
 ## Repository Layout
@@ -239,10 +278,16 @@ investment-research-skills/
 │   │   └── openai.yaml
 │   └── assets/
 │       └── report-template.md
-└── equity-research-pipeline/
+├── equity-research-pipeline/
     ├── SKILL.md
     └── agents/
         └── openai.yaml
+└── equity-comparison-advisor/
+    ├── SKILL.md
+    ├── agents/
+    │   └── openai.yaml
+    └── references/
+        └── comparison-framework.md
 ```
 
 ---
