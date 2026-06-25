@@ -1,0 +1,4 @@
+interface:
+  display_name: "行业与赛道研究"
+  short_description: "分析行业产业链、竞争格局、周期位置和投资机会"
+  default_prompt: "使用 $sector-research 分析一个行业或赛道的产业链结构、竞争格局、周期位置和值得关注的投资方向。"
