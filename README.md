@@ -148,6 +148,8 @@ $sector-research 全球半导体设备赛道，判断周期位置和竞争格局
 
 → [SKILL.md](./sector-research/SKILL.md) · [研究框架](./sector-research/references/research-framework.md)
 
+---
+
 <a id="company-moat-research"></a>
 
 ### Skill 02 · company-moat-research（公司护城河研究）
@@ -182,6 +184,8 @@ $company-moat-research 分析闪迪，重点看 NAND 行业进入壁垒、数据
 ```
 
 → [SKILL.md](./company-moat-research/SKILL.md) · [研究框架](./company-moat-research/references/research-framework.md)
+
+---
 
 <a id="valuation-expectation-check"></a>
 
@@ -219,6 +223,8 @@ $company-moat-research 分析闪迪，重点看 NAND 行业进入壁垒、数据
 
 → [SKILL.md](./valuation-expectation-check/SKILL.md) · [估值框架](./valuation-expectation-check/references/valuation-framework.md)
 
+---
+
 <a id="integrated-equity-research-report"></a>
 
 ### Skill 04 · integrated-equity-research-report（综合股票研究报告）
@@ -255,6 +261,8 @@ $company-moat-research 分析闪迪，重点看 NAND 行业进入壁垒、数据
 
 → [SKILL.md](./integrated-equity-research-report/SKILL.md) · [报告模板](./integrated-equity-research-report/references/report-template.md)
 
+---
+
 <a id="equity-research-pipeline"></a>
 
 ### Skill 05 · equity-research-pipeline（一站式股票研究）
@@ -287,6 +295,8 @@ $equity-research-pipeline 台积电，报告保存到 ~/research/ 目录。
 ```
 
 → [SKILL.md](./equity-research-pipeline/SKILL.md)
+
+---
 
 <a id="equity-comparison-advisor"></a>
 
