@@ -66,23 +66,18 @@ For Claude Code, OpenCode, and other clients, import the desired skill directory
 
 ## Workflow
 
-These skills can be used independently or as a complete research chain: start by screening sectors for promising segments, then run moat analysis on specific companies, validate the expectations implied by the current stock price, and finally turn the work into a standardized Markdown report. You can also use `equity-research-pipeline` to run the entire company research flow in one command. After generating reports for multiple companies, use `equity-comparison-advisor` to compare, rank, and frame portfolio decisions.
+These skills can be used independently or as a complete three-stage research chain: screen sectors first, generate company reports, then compare across companies.
+
+`company-moat-research`, `valuation-expectation-check`, and `integrated-equity-research-report` can each be called independently. They are also orchestrated internally by `equity-research-pipeline` — give it a company name and it runs all three in sequence.
 
 ```mermaid
-flowchart TD
-    S["sector-research<br/>Sector & industry research"] --> A["company-moat-research<br/>Company moat research"]
-    S --> P["equity-comparison-advisor<br/>Equity comparison advisor"]
-    A --> B["valuation-expectation-check<br/>Valuation expectation check"]
-    A --> C["integrated-equity-research-report<br/>Integrated equity research report"]
-    B --> C
-    P2["equity-research-pipeline<br/>End-to-end equity research"] --> A
-    C --> G["equity-comparison-advisor<br/>Equity comparison advisor"]
+flowchart LR
+    S["sector-research<br/>Sector & industry research"] --> |"Identify companies worth studying"| P["equity-research-pipeline<br/>End-to-end equity research"]
+    P --> |"Generate company reports"| G["equity-comparison-advisor<br/>Equity comparison advisor"]
 
-    S -.-> I["Value chain / Competition / Cycle / Investment opportunity"]
-    A -.-> D["Business boundary / Entry barriers / Moat / Business model"]
-    B -.-> E["Current valuation / Implied expectations / Re-rating and de-rating conditions"]
-    C -.-> F["Standardized Markdown research report"]
-    G -.-> H["Comparison / Ranking / Risk-reward matrix / Allocation framework"]
+    S -.-> I["Value chain / Competition / Cycle position"]
+    P -.-> D["Moat analysis / Valuation check / Report generation"]
+    G -.-> H["Comparison / Ranking / Risk-reward matrix"]
 ```
 
 ---
