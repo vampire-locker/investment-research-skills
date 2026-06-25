@@ -5,7 +5,7 @@
 #### Agent Skills for investment research workflows
 
 [![License](https://img.shields.io/badge/License-MIT-3B82F6?style=for-the-badge)](./LICENSE)
-[![Skills](https://img.shields.io/badge/Skills-5-10B981?style=for-the-badge)](#-skills)
+[![Skills](https://img.shields.io/badge/Skills-6-10B981?style=for-the-badge)](#-skills)
 [![AgentSkills](https://img.shields.io/badge/AgentSkills-Standard-8B5CF6?style=for-the-badge)](https://agentskills.io)
 
 ![Claude Code](https://img.shields.io/badge/Claude_Code-Skill-D97706?style=flat-square&logo=anthropic&logoColor=white)
@@ -22,6 +22,7 @@ The current skills are Chinese-first and designed for company research, industry
 
 | Name | One-liner | Entry |
 | --- | --- | --- |
+| [**sector-research**](#-sector-research) | Analyze industry value chain, competitive landscape, cycle position, and investment opportunities — upstream of the research chain | [SKILL.md](./sector-research/SKILL.md) |
 | [**company-moat-research**](#-company-moat-research) | Analyze company moats and industry entry barriers from new entrant, industry researcher, and long-term investor perspectives | [SKILL.md](./company-moat-research/SKILL.md) |
 | [**valuation-expectation-check**](#-valuation-expectation-check) | Check the market expectations, valuation risk, and validation metrics implied by the current stock price | [SKILL.md](./valuation-expectation-check/SKILL.md) |
 | [**integrated-equity-research-report**](#-integrated-equity-research-report) | Merge moat research, valuation checks, and other investment materials into a standardized Markdown research report | [SKILL.md](./integrated-equity-research-report/SKILL.md) |
@@ -51,6 +52,7 @@ Install all skills:
 ```bash
 git clone git@github.com:vampire-locker/investment-research-skills.git
 mkdir -p ~/.codex/skills
+cp -R investment-research-skills/sector-research ~/.codex/skills/
 cp -R investment-research-skills/company-moat-research ~/.codex/skills/
 cp -R investment-research-skills/valuation-expectation-check ~/.codex/skills/
 cp -R investment-research-skills/integrated-equity-research-report ~/.codex/skills/
@@ -64,17 +66,19 @@ For Claude Code, OpenCode, and other clients, import the desired skill directory
 
 ## Workflow
 
-These skills can be used independently or as a complete research chain: analyze the moat first, then check the expectations implied by the current stock price, and finally turn the work into a standardized Markdown report. You can also use `equity-research-pipeline` to run the entire flow in one command. After generating reports for multiple companies, use `equity-comparison-advisor` to compare, rank, and frame portfolio decisions.
+These skills can be used independently or as a complete research chain: start by screening sectors for promising segments, then run moat analysis on specific companies, validate the expectations implied by the current stock price, and finally turn the work into a standardized Markdown report. You can also use `equity-research-pipeline` to run the entire company research flow in one command. After generating reports for multiple companies, use `equity-comparison-advisor` to compare, rank, and frame portfolio decisions.
 
 ```mermaid
 flowchart TD
-    A["company-moat-research<br/>Company moat research"] --> B["valuation-expectation-check<br/>Valuation expectation check"]
+    S["sector-research<br/>Sector & industry research"] --> A["company-moat-research<br/>Company moat research"]
+    S --> P["equity-comparison-advisor<br/>Equity comparison advisor"]
+    A --> B["valuation-expectation-check<br/>Valuation expectation check"]
     A --> C["integrated-equity-research-report<br/>Integrated equity research report"]
     B --> C
-    P["equity-research-pipeline<br/>End-to-end equity research"] --> A
-    P --> G["equity-comparison-advisor<br/>Equity comparison advisor"]
-    C --> G
+    P2["equity-research-pipeline<br/>End-to-end equity research"] --> A
+    C --> G["equity-comparison-advisor<br/>Equity comparison advisor"]
 
+    S -.-> I["Value chain / Competition / Cycle / Investment opportunity"]
     A -.-> D["Business boundary / Entry barriers / Moat / Business model"]
     B -.-> E["Current valuation / Implied expectations / Re-rating and de-rating conditions"]
     C -.-> F["Standardized Markdown research report"]
@@ -84,6 +88,41 @@ flowchart TD
 ---
 
 ## ✨ Skills
+
+### sector-research
+
+> *"How does this sector look? Which segments deserve the most attention? Where are profit pools shifting?"*
+
+This skill does investment research at the sector/industry level, answering questions about value chain structure, competitive dynamics, cycle positioning, and which segments deserve priority research. It has a clear division of labor with `company-moat-research`: `sector-research` picks the sector, `company-moat-research` picks the companies.
+
+**It focuses on**
+
+- Market size, lifecycle stage, and core growth drivers.
+- Value chain structure, profit allocation, and profit migration trends.
+- Competitive landscape, concentration, and evolution direction.
+- Technology roadmap and substitution risks.
+- Policy, regulation, and ESG environment.
+- Cycle positioning and key risk inventory.
+
+**Good for**
+
+- Value chain mapping and sector screening
+- Industry cycle assessment
+- Technology roadmap comparison
+- Policy environment evaluation
+- Identifying segments and company types worth deeper research
+
+**How to trigger**
+
+```text
+Use $sector-research to analyze China's NEV power battery value chain — which segment has the strongest profit pool and competitive position.
+
+$sector-research global semiconductor equipment sector, assess cycle position and competitive landscape.
+
+Analyze the AI data center infrastructure sector with the sector research framework. What's the most interesting segment over the next three years?
+```
+
+→ [SKILL.md](./sector-research/SKILL.md) · [Research framework](./sector-research/references/research-framework.md)
 
 ### company-moat-research
 
@@ -260,6 +299,12 @@ investment-research-skills/
 ├── README.md
 ├── README.en.md
 ├── LICENSE
+├── sector-research/
+│   ├── SKILL.md
+│   ├── agents/
+│   │   └── openai.yaml
+│   └── references/
+│       └── research-framework.md
 ├── company-moat-research/
 │   ├── SKILL.md
 │   ├── agents/
@@ -279,9 +324,9 @@ investment-research-skills/
 │   └── references/
 │       └── report-template.md
 ├── equity-research-pipeline/
-    ├── SKILL.md
-    └── agents/
-        └── openai.yaml
+│   ├── SKILL.md
+│   └── agents/
+│       └── openai.yaml
 └── equity-comparison-advisor/
     ├── SKILL.md
     ├── agents/
