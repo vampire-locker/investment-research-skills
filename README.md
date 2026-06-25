@@ -22,12 +22,12 @@
 
 | 名字 | 一句话 | 入口 |
 | --- | --- | --- |
-| [**sector-research（行业与赛道研究）**](#-sector-research行业与赛道研究) | 分析行业产业链结构、竞争格局、周期位置和投资机会，定位研究链路上游 | [SKILL.md](./sector-research/SKILL.md) |
-| [**company-moat-research（公司护城河研究）**](#-company-moat-research公司护城河研究) | 从新进入者、产业研究员、长期投资者三个视角拆解公司护城河和行业进入壁垒 | [SKILL.md](./company-moat-research/SKILL.md) |
-| [**valuation-expectation-check（股价预期验证）**](#-valuation-expectation-check股价预期验证) | 检查当前股价隐含的市场预期、兑现难度、估值风险和后续验证指标 | [SKILL.md](./valuation-expectation-check/SKILL.md) |
-| [**integrated-equity-research-report（综合股票研究报告）**](#-integrated-equity-research-report综合股票研究报告) | 将护城河研究、估值预期验证和其他投资材料合并成统一格式的 Markdown 研究报告 | [SKILL.md](./integrated-equity-research-report/SKILL.md) |
-| [**equity-research-pipeline（一站式股票研究）**](#-equity-research-pipeline一站式股票研究) | 一条指令完成护城河研究、股价预期验证和综合报告生成 | [SKILL.md](./equity-research-pipeline/SKILL.md) |
-| [**equity-comparison-advisor（股票横向比较顾问）**](#-equity-comparison-advisor股票横向比较顾问) | 对多家公司研究报告做横向比较、排序和配置决策辅助 | [SKILL.md](./equity-comparison-advisor/SKILL.md) |
+| [**01 · sector-research（行业与赛道研究）**](#sector-research) | 分析行业产业链结构、竞争格局、周期位置和投资机会，定位研究链路上游 | [SKILL.md](./sector-research/SKILL.md) |
+| [**02 · company-moat-research（公司护城河研究）**](#company-moat-research) | 从新进入者、产业研究员、长期投资者三个视角拆解公司护城河和行业进入壁垒 | [SKILL.md](./company-moat-research/SKILL.md) |
+| [**03 · valuation-expectation-check（股价预期验证）**](#valuation-expectation-check) | 检查当前股价隐含的市场预期、兑现难度、估值风险和后续验证指标 | [SKILL.md](./valuation-expectation-check/SKILL.md) |
+| [**04 · integrated-equity-research-report（综合股票研究报告）**](#integrated-equity-research-report) | 将护城河研究、估值预期验证和其他投资材料合并成统一格式的 Markdown 研究报告 | [SKILL.md](./integrated-equity-research-report/SKILL.md) |
+| [**05 · equity-research-pipeline（一站式股票研究）**](#equity-research-pipeline) | 一条指令完成护城河研究、股价预期验证和综合报告生成 | [SKILL.md](./equity-research-pipeline/SKILL.md) |
+| [**06 · equity-comparison-advisor（股票横向比较顾问）**](#equity-comparison-advisor) | 对多家公司研究报告做横向比较、排序和配置决策辅助 | [SKILL.md](./equity-comparison-advisor/SKILL.md) |
 
 ---
 
@@ -111,7 +111,9 @@ flowchart TD
 
 ## ✨ Skills
 
-### sector-research（行业与赛道研究）
+<a id="sector-research"></a>
+
+### Skill 01 · sector-research（行业与赛道研究）
 
 > *"这个赛道整体如何？哪个环节最值得关注？产业链利润往哪里走？"*
 
@@ -146,7 +148,9 @@ $sector-research 全球半导体设备赛道，判断周期位置和竞争格局
 
 → [SKILL.md](./sector-research/SKILL.md) · [研究框架](./sector-research/references/research-framework.md)
 
-### company-moat-research（公司护城河研究）
+<a id="company-moat-research"></a>
+
+### Skill 02 · company-moat-research（公司护城河研究）
 
 > *“如果我是一个资金充足、执行力很强的新进入者，能不能从 0 开始挑战这家公司？”*
 
@@ -179,7 +183,9 @@ $company-moat-research 分析闪迪，重点看 NAND 行业进入壁垒、数据
 
 → [SKILL.md](./company-moat-research/SKILL.md) · [研究框架](./company-moat-research/references/research-framework.md)
 
-### valuation-expectation-check（股价预期验证）
+<a id="valuation-expectation-check"></a>
+
+### Skill 03 · valuation-expectation-check（股价预期验证）
 
 > *“根据前面的分析，如何看待它当前的股价？”*
 
@@ -213,7 +219,9 @@ $company-moat-research 分析闪迪，重点看 NAND 行业进入壁垒、数据
 
 → [SKILL.md](./valuation-expectation-check/SKILL.md) · [估值框架](./valuation-expectation-check/references/valuation-framework.md)
 
-### integrated-equity-research-report（综合股票研究报告）
+<a id="integrated-equity-research-report"></a>
+
+### Skill 04 · integrated-equity-research-report（综合股票研究报告）
 
 > *“把前面的研究整理成一份可以归档的 Markdown 报告。”*
 
@@ -247,7 +255,9 @@ $company-moat-research 分析闪迪，重点看 NAND 行业进入壁垒、数据
 
 → [SKILL.md](./integrated-equity-research-report/SKILL.md) · [报告模板](./integrated-equity-research-report/references/report-template.md)
 
-### equity-research-pipeline（一站式股票研究）
+<a id="equity-research-pipeline"></a>
+
+### Skill 05 · equity-research-pipeline（一站式股票研究）
 
 > *"/equity-research-pipeline 微软"——一条指令，完整研究报告。*
 
@@ -278,7 +288,9 @@ $equity-research-pipeline 台积电，报告保存到 ~/research/ 目录。
 
 → [SKILL.md](./equity-research-pipeline/SKILL.md)
 
-### equity-comparison-advisor（股票横向比较顾问）
+<a id="equity-comparison-advisor"></a>
+
+### Skill 06 · equity-comparison-advisor（股票横向比较顾问）
 
 > *“这些研究报告里，哪些公司更值得优先研究或配置？”*
 
