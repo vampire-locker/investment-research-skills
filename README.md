@@ -184,7 +184,7 @@ $company-moat-research 分析闪迪，重点看 NAND 行业进入壁垒、数据
 根据这些研究材料生成一份统一格式的公司研究报告，不要给买卖建议。
 ```
 
-→ [SKILL.md](./integrated-equity-research-report/SKILL.md) · [报告模板](./integrated-equity-research-report/assets/report-template.md)
+→ [SKILL.md](./integrated-equity-research-report/SKILL.md) · [报告模板](./integrated-equity-research-report/references/report-template.md)
 
 ### equity-research-pipeline（一站式股票研究）
 
@@ -276,7 +276,7 @@ investment-research-skills/
 │   ├── SKILL.md
 │   ├── agents/
 │   │   └── openai.yaml
-│   └── assets/
+│   └── references/
 │       └── report-template.md
 ├── equity-research-pipeline/
     ├── SKILL.md

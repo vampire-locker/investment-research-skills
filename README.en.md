@@ -184,7 +184,7 @@ Merge the previous $company-moat-research and $valuation-expectation-check outpu
 Generate a standardized company research report from these research materials. Do not give buy/sell advice.
 ```
 
-→ [SKILL.md](./integrated-equity-research-report/SKILL.md) · [Report template](./integrated-equity-research-report/assets/report-template.md)
+→ [SKILL.md](./integrated-equity-research-report/SKILL.md) · [Report template](./integrated-equity-research-report/references/report-template.md)
 
 ### equity-research-pipeline
 
@@ -276,7 +276,7 @@ investment-research-skills/
 │   ├── SKILL.md
 │   ├── agents/
 │   │   └── openai.yaml
-│   └── assets/
+│   └── references/
 │       └── report-template.md
 ├── equity-research-pipeline/
     ├── SKILL.md
