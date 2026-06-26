@@ -20,47 +20,45 @@
 
 ## 目录
 
-| 名字 | 一句话 | 入口 |
-| --- | --- | --- |
-| [**01 · sector-research（行业与赛道研究）**](#sector-research) | 分析行业产业链结构、竞争格局、周期位置和投资机会，定位研究链路上游 | [SKILL.md](./sector-research/SKILL.md) |
-| [**02 · company-moat-research（公司护城河研究）**](#company-moat-research) | 从新进入者、产业研究员、长期投资者三个视角拆解公司护城河和行业进入壁垒 | [SKILL.md](./company-moat-research/SKILL.md) |
-| [**03 · valuation-expectation-check（股价预期验证）**](#valuation-expectation-check) | 检查当前股价隐含的市场预期、兑现难度、估值风险和后续验证指标 | [SKILL.md](./valuation-expectation-check/SKILL.md) |
-| [**04 · integrated-equity-research-report（综合股票研究报告）**](#integrated-equity-research-report) | 将护城河研究、估值预期验证和其他投资材料合并成统一格式的 Markdown 研究报告 | [SKILL.md](./integrated-equity-research-report/SKILL.md) |
-| [**05 · equity-research-pipeline（一站式股票研究）**](#equity-research-pipeline) | 一条指令完成护城河研究、股价预期验证和综合报告生成 | [SKILL.md](./equity-research-pipeline/SKILL.md) |
-| [**06 · equity-comparison-advisor（股票横向比较顾问）**](#equity-comparison-advisor) | 对多家公司研究报告做横向比较、排序和配置决策辅助 | [SKILL.md](./equity-comparison-advisor/SKILL.md) |
+| 名字 | 一句话 |
+| --- | --- |
+| [**investment-research（总入口）**](#investment-research) | 自动识别研究意图，路由到对应的子技能，无需记忆子技能名称 |
+| [**RULES.md**](./RULES.md) | 全局共享规则：输出格式、证据纪律、禁止事项、质量检查 |
+| [**routing.md**](./routing.md) | 意图→技能路由矩阵 |
+| [**01 · sector-research（行业与赛道研究）**](#sector-research) | 分析行业产业链结构、竞争格局、周期位置和投资机会，定位研究链路上游 |
+| [**02 · company-moat-research（公司护城河研究）**](#company-moat-research) | 从新进入者、产业研究员、长期投资者三个视角拆解公司护城河和行业进入壁垒 |
+| [**03 · valuation-expectation-check（股价预期验证）**](#valuation-expectation-check) | 检查当前股价隐含的市场预期、兑现难度、估值风险和后续验证指标 |
+| [**04 · integrated-equity-research-report（综合股票研究报告）**](#integrated-equity-research-report) | 将护城河研究、估值预期验证和其他投资材料合并成统一格式的 Markdown 研究报告 |
+| [**05 · equity-research-pipeline（一站式股票研究）**](#equity-research-pipeline) | 一条指令完成护城河研究、股价预期验证和综合报告生成 |
+| [**06 · equity-comparison-advisor（股票横向比较顾问）**](#equity-comparison-advisor) | 对多家公司研究报告做横向比较、排序和配置决策辅助 |
 
 ---
 
 ## 安装
 
-在支持 Skills 的 Agent 里，可以直接让 Agent 安装指定目录：
-
-```text
-帮我安装这个 skill：https://github.com/vampire-locker/investment-research-skills/tree/main/company-moat-research
-```
-
-也可以手动安装到 Codex。安装单个 skill：
+整体安装全部 skill（推荐）：
 
 ```bash
 git clone git@github.com:vampire-locker/investment-research-skills.git
-mkdir -p ~/.codex/skills
-cp -R investment-research-skills/company-moat-research ~/.codex/skills/
+mkdir -p ~/.codex/skills/investment-research
+cp -R investment-research-skills/company-moat-research ~/.codex/skills/investment-research/
+cp -R investment-research-skills/equity-comparison-advisor ~/.codex/skills/investment-research/
+cp -R investment-research-skills/equity-research-pipeline ~/.codex/skills/investment-research/
+cp -R investment-research-skills/integrated-equity-research-report ~/.codex/skills/investment-research/
+cp -R investment-research-skills/sector-research ~/.codex/skills/investment-research/
+cp -R investment-research-skills/valuation-expectation-check ~/.codex/skills/investment-research/
+cp investment-research-skills/SKILL.md ~/.codex/skills/investment-research/
+cp investment-research-skills/RULES.md ~/.codex/skills/investment-research/
+cp investment-research-skills/routing.md ~/.codex/skills/investment-research/
 ```
 
-安装全部 skills：
+安装后无需记忆子技能名称，用自然语言描述需求即可自动路由：
 
-```bash
-git clone git@github.com:vampire-locker/investment-research-skills.git
-mkdir -p ~/.codex/skills
-cp -R investment-research-skills/sector-research ~/.codex/skills/
-cp -R investment-research-skills/company-moat-research ~/.codex/skills/
-cp -R investment-research-skills/valuation-expectation-check ~/.codex/skills/
-cp -R investment-research-skills/integrated-equity-research-report ~/.codex/skills/
-cp -R investment-research-skills/equity-research-pipeline ~/.codex/skills/
-cp -R investment-research-skills/equity-comparison-advisor ~/.codex/skills/
-```
+- "帮我分析一下宁德时代" → 走一站式研究流水线
+- "动力电池产业链，哪个环节最值得关注" → 走行业研究
+- "对比一下七姐妹，谁更值得优先研究" → 走横向比较
 
-Claude Code、OpenCode 等其他客户端请按各自的 skill 导入方式安装所需 skill 目录。
+Claude Code、OpenCode 等其他客户端请按各自的 skill 导入方式安装整个目录。
 
 ---
 
@@ -110,6 +108,24 @@ flowchart TD
 ---
 
 ## ✨ Skills
+
+<a id="investment-research"></a>
+
+### 总入口 · investment-research
+
+> *"帮我分析一下宁德时代"——一句话，自动路由到正确的分析流程。*
+
+总入口是投资研究技能体系的统一触发点。安装后只需在对话中描述研究需求，系统自动根据关键词和意图路由到对应的子技能，无需记忆 6 个子技能的名称。
+
+**它负责**
+
+- 意图识别：判断用户要的是行业研究、公司研究、估值验证还是横向比较。
+- 共享规则加载：读取 RULES.md，确保所有子技能统一遵守输出格式、证据纪律和禁止事项。
+- 完成前质量检查：所有分析在声称"完成"前必须逐项打勾。
+
+→ [SKILL.md](./SKILL.md) · [RULES.md](./RULES.md) · [routing.md](./routing.md)
+
+---
 
 <a id="sector-research"></a>
 
@@ -340,6 +356,9 @@ $equity-research-pipeline 台积电，报告保存到 ~/research/ 目录。
 
 ```text
 investment-research-skills/
+├── SKILL.md                          ← 总入口，关键词路由
+├── RULES.md                          ← 全局共享规则
+├── routing.md                        ← 意图→技能路由矩阵
 ├── README.md
 ├── README.en.md
 ├── LICENSE
