@@ -13,9 +13,3 @@ build/
 __pycache__/
 skill-system-audit-*.md
 docs/
-
-# field-journal：追踪框架和种子文件，忽略用户自行生成的实战日志
-field-journal/*
-!field-journal/_*
-!field-journal/precedent-*
-!field-journal/seed-*
