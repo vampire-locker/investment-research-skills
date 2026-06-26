@@ -36,20 +36,20 @@
 
 ## 安装
 
-整体安装全部 skill（推荐）：
+### Codex
 
 ```bash
 git clone git@github.com:vampire-locker/investment-research-skills.git
-mkdir -p ~/.codex/skills/investment-research
-cp -R investment-research-skills/company-moat-research ~/.codex/skills/investment-research/
-cp -R investment-research-skills/equity-comparison-advisor ~/.codex/skills/investment-research/
-cp -R investment-research-skills/equity-research-pipeline ~/.codex/skills/investment-research/
-cp -R investment-research-skills/integrated-equity-research-report ~/.codex/skills/investment-research/
-cp -R investment-research-skills/sector-research ~/.codex/skills/investment-research/
-cp -R investment-research-skills/valuation-expectation-check ~/.codex/skills/investment-research/
-cp investment-research-skills/SKILL.md ~/.codex/skills/investment-research/
-cp investment-research-skills/RULES.md ~/.codex/skills/investment-research/
-cp investment-research-skills/routing.md ~/.codex/skills/investment-research/
+mkdir -p ~/.codex/skills/investment-research-skills
+cp -R investment-research-skills/* ~/.codex/skills/investment-research-skills/
+```
+
+### Claude Code
+
+```bash
+git clone git@github.com:vampire-locker/investment-research-skills.git
+mkdir -p ~/.claude/skills/investment-research-skills
+cp -R investment-research-skills/* ~/.claude/skills/investment-research-skills/
 ```
 
 安装后无需记忆子技能名称，用自然语言描述需求即可自动路由：
@@ -57,8 +57,6 @@ cp investment-research-skills/routing.md ~/.codex/skills/investment-research/
 - "帮我分析一下宁德时代" → 走一站式研究流水线
 - "动力电池产业链，哪个环节最值得关注" → 走行业研究
 - "对比一下七姐妹，谁更值得优先研究" → 走横向比较
-
-Claude Code、OpenCode 等其他客户端请按各自的 skill 导入方式安装整个目录。
 
 ---
 
