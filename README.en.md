@@ -20,47 +20,43 @@ The current skills are Chinese-first and designed for company research, industry
 
 ## Index
 
-| Name | One-liner | Entry |
-| --- | --- | --- |
-| [**sector-research**](#-sector-research) | Analyze industry value chain, competitive landscape, cycle position, and investment opportunities — upstream of the research chain | [SKILL.md](./sector-research/SKILL.md) |
-| [**company-moat-research**](#-company-moat-research) | Analyze company moats and industry entry barriers from new entrant, industry researcher, and long-term investor perspectives | [SKILL.md](./company-moat-research/SKILL.md) |
-| [**valuation-expectation-check**](#-valuation-expectation-check) | Check the market expectations, valuation risk, and validation metrics implied by the current stock price | [SKILL.md](./valuation-expectation-check/SKILL.md) |
-| [**integrated-equity-research-report**](#-integrated-equity-research-report) | Merge moat research, valuation checks, and other investment materials into a standardized Markdown research report | [SKILL.md](./integrated-equity-research-report/SKILL.md) |
-| [**equity-research-pipeline**](#-equity-research-pipeline) | One command to run moat research, valuation check, and report generation end-to-end | [SKILL.md](./equity-research-pipeline/SKILL.md) |
-| [**equity-comparison-advisor**](#-equity-comparison-advisor) | Compare multiple company reports, rank candidates, and build a decision framework | [SKILL.md](./equity-comparison-advisor/SKILL.md) |
+| Name | One-liner |
+| --- | --- |
+| [**investment-research (Master Entry)**](#-investment-research) | Automatic intent recognition and routing to the correct sub-skill — no need to memorize sub-skill names |
+| [**RULES.md**](./RULES.md) | Global shared rules: output formatting, evidence discipline, prohibited advice, quality checklist |
+| [**routing.md**](./routing.md) | Intent → skill routing matrix |
+| [**sector-research**](#-sector-research) | Analyze industry value chain, competitive landscape, cycle position, and investment opportunities — upstream of the research chain |
+| [**company-moat-research**](#-company-moat-research) | Analyze company moats and industry entry barriers from new entrant, industry researcher, and long-term investor perspectives |
+| [**valuation-expectation-check**](#-valuation-expectation-check) | Check the market expectations, valuation risk, and validation metrics implied by the current stock price |
+| [**integrated-equity-research-report**](#-integrated-equity-research-report) | Merge moat research, valuation checks, and other investment materials into a standardized Markdown research report |
+| [**equity-research-pipeline**](#-equity-research-pipeline) | One command to run moat research, valuation check, and report generation end-to-end |
+| [**equity-comparison-advisor**](#-equity-comparison-advisor) | Compare multiple company reports, rank candidates, and build a decision framework |
 
 ---
 
 ## Install
 
-In an agent that supports Skills, ask the agent to install the skill directory:
-
-```text
-Install this skill: https://github.com/vampire-locker/investment-research-skills/tree/main/company-moat-research
-```
-
-Manual install for Codex. Install one skill:
+### Codex
 
 ```bash
 git clone git@github.com:vampire-locker/investment-research-skills.git
-mkdir -p ~/.codex/skills
-cp -R investment-research-skills/company-moat-research ~/.codex/skills/
+mkdir -p ~/.codex/skills/investment-research-skills
+cp -R investment-research-skills/* ~/.codex/skills/investment-research-skills/
 ```
 
-Install all skills:
+### Claude Code
 
 ```bash
 git clone git@github.com:vampire-locker/investment-research-skills.git
-mkdir -p ~/.codex/skills
-cp -R investment-research-skills/sector-research ~/.codex/skills/
-cp -R investment-research-skills/company-moat-research ~/.codex/skills/
-cp -R investment-research-skills/valuation-expectation-check ~/.codex/skills/
-cp -R investment-research-skills/integrated-equity-research-report ~/.codex/skills/
-cp -R investment-research-skills/equity-research-pipeline ~/.codex/skills/
-cp -R investment-research-skills/equity-comparison-advisor ~/.codex/skills/
+mkdir -p ~/.claude/skills/investment-research-skills
+cp -R investment-research-skills/* ~/.claude/skills/investment-research-skills/
 ```
 
-For Claude Code, OpenCode, and other clients, import the desired skill directory according to the client's current skill workflow.
+Once installed, describe your research need in natural language. The routing system will dispatch to the correct sub-skill automatically:
+
+- "Analyze NVIDIA" → end-to-end research pipeline
+- "What's the EV battery value chain like?" → sector research
+- "Compare the Magnificent Seven" → equity comparison
 
 ---
 
@@ -83,6 +79,24 @@ flowchart LR
 ---
 
 ## ✨ Skills
+
+<a id="investment-research"></a>
+
+### Master Entry · investment-research
+
+> *"Analyze NVIDIA" — one sentence, automatically routed to the correct analysis pipeline.*
+
+The master entry is the unified trigger point for the investment research skill system. Once installed, simply describe your research need in natural language. The system automatically recognizes keywords and intent, then routes to the appropriate sub-skill.
+
+**Responsibilities**
+
+- Intent recognition: determine whether the user wants sector research, company research, valuation checks, or cross-company comparison.
+- Shared rule loading: read RULES.md to ensure all sub-skills consistently follow output formatting, evidence discipline, and prohibited-advice rules.
+- Pre-completion quality checks: all analyses must pass a checklist before claiming "done".
+
+→ [SKILL.md](./SKILL.md) · [RULES.md](./RULES.md) · [routing.md](./routing.md)
+
+---
 
 ### sector-research
 
@@ -110,11 +124,11 @@ This skill does investment research at the sector/industry level, answering ques
 **How to trigger**
 
 ```text
-Use $sector-research to analyze China's NEV power battery value chain — which segment has the strongest profit pool and competitive position.
+Analyze China's NEV power battery value chain — which segment has the strongest profit pool and competitive position.
 
-$sector-research global semiconductor equipment sector, assess cycle position and competitive landscape.
+How does the global semiconductor equipment sector look? Assess cycle position and competitive landscape.
 
-Analyze the AI data center infrastructure sector with the sector research framework. What's the most interesting segment over the next three years?
+Analyze the AI data center infrastructure sector. What's the most interesting segment over the next three years?
 ```
 
 → [SKILL.md](./sector-research/SKILL.md) · [Research framework](./sector-research/references/research-framework.md)
@@ -143,11 +157,11 @@ This skill helps analyze a company through its real business system. Instead of 
 **How to trigger**
 
 ```text
-Use $company-moat-research to analyze NVIDIA's AI data center infrastructure business.
+Analyze NVIDIA's AI data center infrastructure moat.
 
-Use $company-moat-research to analyze Sandisk, focusing on NAND entry barriers, data center SSD opportunities, and long-term holding conditions.
+Look at Sandisk — focus on NAND entry barriers, data center SSD opportunities, and long-term holding conditions.
 
-Analyze Costco with the company moat research framework. Assume I am a new entrant trying to challenge it in five years.
+Analyze Costco using the moat framework. Assume I am a new entrant trying to challenge it in five years.
 ```
 
 → [SKILL.md](./company-moat-research/SKILL.md) · [Research framework](./company-moat-research/references/research-framework.md)
@@ -177,11 +191,11 @@ This skill maps company research, industry research, earnings analysis, or moat 
 **How to trigger**
 
 ```text
-Use $valuation-expectation-check to analyze what market expectations are implied by NVIDIA's current stock price.
+What market expectations are implied by NVIDIA's current stock price? Don't give buy/sell advice.
 
-Based on the previous Sandisk analysis, use $valuation-expectation-check to evaluate whether the current price already reflects NAND strength.
+Based on the Sandisk analysis, does the current price already reflect NAND strength? Please only break down expectations and validation metrics.
 
-Is this company's current valuation expensive? Do not give buy/sell advice; break down market expectations and validation metrics.
+Is this company's valuation expensive? Break down market expectations and key indicators.
 ```
 
 → [SKILL.md](./valuation-expectation-check/SKILL.md) · [Valuation framework](./valuation-expectation-check/references/valuation-framework.md)
@@ -211,18 +225,16 @@ This skill merges moat research, valuation expectation checks, earnings analysis
 **How to trigger**
 
 ```text
-Use $integrated-equity-research-report to turn the previous Tencent moat analysis and valuation expectation check into a Markdown research report.
+Turn the previous Tencent moat analysis and valuation check into a Markdown research report.
 
-Merge the previous $company-moat-research and $valuation-expectation-check outputs into a formal research report.
-
-Generate a standardized company research report from these research materials. Do not give buy/sell advice.
+Generate a standardized company research report from these materials. Do not give buy/sell advice.
 ```
 
 → [SKILL.md](./integrated-equity-research-report/SKILL.md) · [Report template](./integrated-equity-research-report/references/report-template.md)
 
 ### equity-research-pipeline
 
-> *"/equity-research-pipeline Microsoft" — one command, complete research report.*
+> *"Analyze Microsoft" — one sentence, complete research report.*
 
 This skill chains moat research, valuation expectation checks, and report generation into a single end-to-end pipeline. Provide a company name and it runs all three steps in sequence, producing an archivable Markdown research report.
 
@@ -242,11 +254,11 @@ This skill chains moat research, valuation expectation checks, and report genera
 **How to trigger**
 
 ```text
-Use $equity-research-pipeline to analyze Microsoft.
+Analyze Microsoft end-to-end.
 
-$equity-research-pipeline TSMC, save the report to ~/research/.
+Research TSMC and save the report to ~/research/.
 
-Run the end-to-end research pipeline for NVIDIA and produce a full report.
+Run the full research pipeline for NVIDIA and produce a complete report.
 ```
 
 → [SKILL.md](./equity-research-pipeline/SKILL.md)
@@ -276,11 +288,11 @@ This skill reads multiple company research reports, extracts comparable fields, 
 **How to trigger**
 
 ```text
-Use $equity-comparison-advisor to compare the Magnificent Seven reports under ~/research/magnificent-seven.
+Compare the Magnificent Seven reports under ~/research/magnificent-seven.
 
-Based on these reports, compare which companies deserve priority research and which should wait for valuation digestion.
+Based on these reports, which companies deserve priority research and which should wait for valuation digestion?
 
-Use $equity-comparison-advisor to produce table-based rankings, a risk-reward matrix, and buy-condition tables.
+Produce table-based rankings, a risk-reward matrix, and buy-condition tables.
 ```
 
 → [SKILL.md](./equity-comparison-advisor/SKILL.md) · [Comparison framework](./equity-comparison-advisor/references/comparison-framework.md)
@@ -291,6 +303,9 @@ Use $equity-comparison-advisor to produce table-based rankings, a risk-reward ma
 
 ```text
 investment-research-skills/
+├── SKILL.md                          ← Master entry, keyword routing
+├── RULES.md                          ← Global shared rules
+├── routing.md                        ← Intent → skill routing matrix
 ├── README.md
 ├── README.en.md
 ├── LICENSE
