@@ -12,7 +12,7 @@
 ![Codex](https://img.shields.io/badge/Codex-Skill-10B981?style=flat-square&logo=openai&logoColor=white)
 ![OpenCode](https://img.shields.io/badge/OpenCode-Skill-3B82F6?style=flat-square)
 
-这里收集的是投资研究场景下可复用的 Agent Skills。每个 skill 都是一个独立的结构化指令集，遵循 [Agent Skills](https://agentskills.io) 开放格式，可被支持 `SKILL.md` 的 Agent 客户端加载。
+这里收集的是投资研究场景下可复用的 Agent Skills。它是一个整体安装的 skill 体系，总入口 `investment-research` 自动根据用户意图路由到行业研究、公司护城河分析、股价预期验证、综合报告生成或横向比较等子技能。各子技能遵循 [Agent Skills](https://agentskills.io) 开放格式。
 
 当前仓库以中文研究输出为主，适合公司研究、行业壁垒分析、护城河判断、竞争对手攻击模拟、财务与商业模式验证等场景。
 
@@ -62,9 +62,9 @@ cp -R investment-research-skills/* ~/.claude/skills/investment-research-skills/
 
 ## 工作流
 
-这些 skill 既可以单独使用，也可以按研究深度逐层组合。推荐先判断问题属于哪一层，再选择对应入口：
+安装后只需用自然语言描述研究需求，总入口自动识别意图并路由到对应子技能。常见场景：
 
-| 研究问题 | 推荐入口 | 典型输出 |
+| 研究问题 | 自动路由到 | 典型输出 |
 | --- | --- | --- |
 | 想先看一个行业或赛道值不值得研究 | `sector-research` | 产业链结构、利润分布、竞争格局、周期位置、值得深入研究的环节 |
 | 已经有目标公司，想做一份完整研究报告 | `equity-research-pipeline` | 数据基线、护城河研究、估值预期验证、统一 Markdown 报告 |
@@ -74,33 +74,27 @@ cp -R investment-research-skills/* ~/.claude/skills/investment-research-skills/
 
 最常见的完整链路是：
 
-1. 用 `sector-research` 从行业层面确定值得关注的环节和公司类型。
-2. 对候选公司逐一使用 `equity-research-pipeline`，生成标准化单家公司研究报告。
-3. 当积累了多份公司报告后，用 `equity-comparison-advisor` 做横向比较、优先级排序和条件化配置辅助。
+1. 用自然语言描述行业研究需求，触发 `sector-research` 从行业层面确定值得关注的公司类型。
+2. 对候选公司逐一提供名称，触发 `equity-research-pipeline` 生成标准化研究报告。
+3. 当积累了多份公司报告后，触发 `equity-comparison-advisor` 做横向比较和优先级排序。
 
-如果已经明确目标公司，可以跳过行业研究，直接从 `equity-research-pipeline` 开始。这个流水线内部会依次调用 `company-moat-research`、`valuation-expectation-check` 和 `integrated-equity-research-report`，用户只需提供公司名称即可跑完整个单家公司研究流程。
-
-如果只需要局部分析，也可以直接调用底层 skill：例如只做护城河压力测试时用 `company-moat-research`，只做股价预期检查时用 `valuation-expectation-check`，只想把已有材料整理成报告时用 `integrated-equity-research-report`。
+如果已经明确目标公司，可以跳过行业研究，直接提供公司名称即可跑完整个单家公司研究流程。
 
 ```mermaid
 flowchart TD
     Q["研究问题"] --> A{"入口选择"}
 
-    A -->|"先看赛道"| S["sector-research<br/>行业与赛道研究"]
-    A -->|"已有目标公司"| P["equity-research-pipeline<br/>一站式股票研究"]
-    A -->|"已有多份报告"| C["equity-comparison-advisor<br/>股票横向比较顾问"]
-    A -->|"只做局部分析"| L["底层 skill<br/>按需单独调用"]
+    A -->|"行业/赛道"| S["sector-research<br/>行业与赛道研究"]
+    A -->|"公司研究"| P["equity-research-pipeline<br/>一站式股票研究"]
+    A -->|"横向比较"| C["equity-comparison-advisor<br/>股票横向比较顾问"]
+    A -->|"估值追问"| V["valuation-expectation-check<br/>股价预期验证"]
 
-    S -->|"识别关键环节和候选公司"| P
-    P -->|"生成标准化单家公司报告"| C
+    S -->|"识别关键环节"| P
+    P -->|"生成标准化报告"| C
 
     P -.-> M["company-moat-research<br/>护城河研究"]
-    P -.-> V["valuation-expectation-check<br/>股价预期验证"]
+    P -.-> D["valuation-expectation-check<br/>股价预期验证"]
     P -.-> R["integrated-equity-research-report<br/>综合报告生成"]
-
-    L -.-> M
-    L -.-> V
-    L -.-> R
 ```
 
 ---

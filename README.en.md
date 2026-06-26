@@ -12,7 +12,7 @@
 ![Codex](https://img.shields.io/badge/Codex-Skill-10B981?style=flat-square&logo=openai&logoColor=white)
 ![OpenCode](https://img.shields.io/badge/OpenCode-Skill-3B82F6?style=flat-square)
 
-This repository collects reusable Agent Skills for investment research. Each skill is a standalone structured instruction set that follows the [Agent Skills](https://agentskills.io) open format and can be loaded by clients that support `SKILL.md`.
+This repository collects reusable Agent Skills for investment research. It is a single unified skill system — the master entry `investment-research` automatically recognizes user intent and routes to sector research, company moat analysis, valuation checks, report generation, or cross-company comparison. Individual sub-skills follow the [Agent Skills](https://agentskills.io) open format.
 
 The current skills are Chinese-first and designed for company research, industry entry-barrier analysis, moat testing, competitor attack simulation, and financial/business-model validation.
 
@@ -62,14 +62,28 @@ Once installed, describe your research need in natural language. The routing sys
 
 ## Workflow
 
-These skills can be used independently or as a complete three-stage research chain: screen sectors first, generate company reports, then compare across companies.
+Once installed, describe your research need in natural language. The master entry automatically recognizes intent and routes to the appropriate sub-skill:
 
-`company-moat-research`, `valuation-expectation-check`, and `integrated-equity-research-report` can each be called independently. They are also orchestrated internally by `equity-research-pipeline` — give it a company name and it runs all three in sequence.
+| Research question | Auto-routed to | Typical output |
+| --- | --- | --- |
+| Explore a sector or industry | `sector-research` | Value chain, profit pools, competitive landscape, cycle position, segments worth studying |
+| Full company research report | `equity-research-pipeline` | Data baseline, moat research, valuation check, standardized Markdown report |
+| Analyze a company's moat or entry barriers | `company-moat-research` | Business boundaries, entry difficulty, moat sources, failure conditions, tracking metrics |
+| Check what the current stock price implies | `valuation-expectation-check` | Market-implied expectations, achievability, re-rate/de-rate conditions, validation metrics |
+| Compare multiple company reports | `equity-comparison-advisor` | Cross-company overview, scoring & ranking, risk-reward matrix, buy/wait/reassess conditions |
+
+The most common full-chain workflow:
+
+1. Describe an industry to trigger `sector-research` and identify companies worth studying.
+2. Provide company names to trigger `equity-research-pipeline` for standardized reports.
+3. Trigger `equity-comparison-advisor` to rank and compare across companies.
+
+If you already have a target company, skip sector research and provide the company name directly.
 
 ```mermaid
 flowchart LR
-    S["sector-research<br/>Sector & industry research"] --> |"Identify companies worth studying"| P["equity-research-pipeline<br/>End-to-end equity research"]
-    P --> |"Generate company reports"| G["equity-comparison-advisor<br/>Equity comparison advisor"]
+    S["sector-research<br/>Sector & industry research"] --> |"Identify companies"| P["equity-research-pipeline<br/>End-to-end equity research"]
+    P --> |"Generate reports"| G["equity-comparison-advisor<br/>Equity comparison advisor"]
 
     S -.-> I["Value chain / Competition / Cycle position"]
     P -.-> D["Moat analysis / Valuation check / Report generation"]
