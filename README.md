@@ -153,11 +153,11 @@ flowchart TD
 **怎么触发**
 
 ```text
-使用 $sector-research 分析中国新能源车动力电池产业链，看哪个环节利润最厚、格局最好。
+分析中国新能源车动力电池产业链，看哪个环节利润最厚、格局最好。
 
-$sector-research 全球半导体设备赛道，判断周期位置和竞争格局。
+全球半导体设备赛道怎么样？判断一下周期位置和竞争格局。
 
-用行业研究框架分析 AI 数据中心基础设施这个赛道，未来 3 年最值得关注的环节是什么。
+AI 数据中心基础设施这个赛道，未来 3 年最值得关注的环节是什么。
 ```
 
 → [SKILL.md](./sector-research/SKILL.md) · [研究框架](./sector-research/references/research-framework.md)
@@ -190,11 +190,11 @@ $sector-research 全球半导体设备赛道，判断周期位置和竞争格局
 **怎么触发**
 
 ```text
-使用 $company-moat-research 分析英伟达所在的 AI 数据中心基础设施业务。
+分析英伟达的护城河——如果我是一个资金充足的新进入者，能不能从 0 开始挑战它？
 
-$company-moat-research 分析闪迪，重点看 NAND 行业进入壁垒、数据中心 SSD 机会和长期持有条件。
+看看闪迪的 NAND 行业进入壁垒、数据中心 SSD 机会和长期持有条件。
 
-用公司护城河研究框架分析 Costco，假设我是新进入者，未来 5 年想挑战它。
+用护城河框架分析 Costco，假设我是新进入者，未来 5 年想挑战它。
 ```
 
 → [SKILL.md](./company-moat-research/SKILL.md) · [研究框架](./company-moat-research/references/research-framework.md)
@@ -228,11 +228,11 @@ $company-moat-research 分析闪迪，重点看 NAND 行业进入壁垒、数据
 **怎么触发**
 
 ```text
-使用 $valuation-expectation-check 分析英伟达当前股价隐含了什么市场预期。
+英伟达当前股价隐含了什么市场预期？请不要给买卖建议。
 
-根据前面对闪迪的分析，用 $valuation-expectation-check 看看当前股价是否已经反映 NAND 景气。
+根据前面的分析，闪迪的当前股价是否已经反映 NAND 景气？
 
-这家公司当前估值贵不贵？请不要给买卖建议，只拆解市场预期和后续验证指标。
+这家公司估值贵不贵？只拆解市场预期和后续验证指标。
 ```
 
 → [SKILL.md](./valuation-expectation-check/SKILL.md) · [估值框架](./valuation-expectation-check/references/valuation-framework.md)
@@ -266,9 +266,7 @@ $company-moat-research 分析闪迪，重点看 NAND 行业进入壁垒、数据
 **怎么触发**
 
 ```text
-使用 $integrated-equity-research-report 把前面的腾讯护城河分析和估值预期检查整理成一份 Markdown 研究报告。
-
-将上面的 $company-moat-research 和 $valuation-expectation-check 结果合并为正式研究报告。
+把前面的腾讯护城河分析和估值预期检查整理成一份 Markdown 研究报告。
 
 根据这些研究材料生成一份统一格式的公司研究报告，不要给买卖建议。
 ```
@@ -281,7 +279,7 @@ $company-moat-research 分析闪迪，重点看 NAND 行业进入壁垒、数据
 
 ### Skill 05 · equity-research-pipeline（一站式股票研究）
 
-> *"/equity-research-pipeline 微软"——一条指令，完整研究报告。*
+> *"分析一下微软"——一句话，自动走完完整研究报告流程。*
 
 这个 skill 把护城河研究、股价预期验证和综合报告生成串成一条完整流水线。用户只需提供公司名称，skill 会依次完成护城河分析、估值验证和报告沉淀，最终输出一份可归档的 Markdown 研究报告。
 
@@ -301,11 +299,11 @@ $company-moat-research 分析闪迪，重点看 NAND 行业进入壁垒、数据
 **怎么触发**
 
 ```text
-使用 $equity-research-pipeline 分析微软。
+完整分析一下微软。
 
-$equity-research-pipeline 台积电，报告保存到 ~/research/ 目录。
+帮我研究台积电，报告保存到 ~/research/ 目录。
 
-帮我用一站式研究流程分析英伟达，生成完整研究报告。
+用一站式研究流程分析英伟达，生成完整研究报告。
 ```
 
 → [SKILL.md](./equity-research-pipeline/SKILL.md)
@@ -339,11 +337,11 @@ $equity-research-pipeline 台积电，报告保存到 ~/research/ 目录。
 **怎么触发**
 
 ```text
-使用 $equity-comparison-advisor 对 ~/research/magnificent-seven 里的七姐妹研究报告做横向比较。
+对 ~/research/magnificent-seven 里的七姐妹研究报告做横向比较。
 
-基于这些研究报告，帮我比较哪些公司更适合优先研究、哪些应该等待估值消化。
+帮我比较这几家公司哪些更适合优先研究、哪些应该等待估值消化。
 
-用 $equity-comparison-advisor 输出表格化排序、风险收益矩阵和买入条件表。
+输出表格化排序、风险收益矩阵和买入条件表。
 ```
 
 → [SKILL.md](./equity-comparison-advisor/SKILL.md) · [比较框架](./equity-comparison-advisor/references/comparison-framework.md)
